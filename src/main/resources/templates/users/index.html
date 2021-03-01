@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <div class="container">
+
+
+      <div class="search-wrapper">
+        <h2>さがす</h2>
+        <form method="get">
+          <input type="text">
+          <button><i class="fas fa-search"></i></button>
+        </form>
+      </div>
+      <table>
+        <tr th:each="user: ${users}">
+          <td class="red" th:text="${user.name}"></td>
+          <td th:text="${user.profile}"></td>
+        </tr>
+      </table>
+    </div>
+  </main>
+  <div th:replace="/commons/footer::footer1"></div>
+</body>
+
+</html>

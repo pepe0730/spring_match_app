@@ -1,0 +1,77 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  width: 600px;
+  margin: 0 auto;
+  border: 1px solid #eee;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  min-height: 100vh;
+}
+
+body main {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.search-wrapper {
+  margin: 60px auto;
+  width: 90%;
+}
+
+.search-wrapper h2 {
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.search-wrapper form {
+  position: relative;
+  margin: 0 auto;
+}
+
+.search-wrapper form input {
+  display: block;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 25px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.search-wrapper form button {
+  position: absolute;
+  right: 20px;
+  top: 2px;
+  color: rgba(0, 0, 0, 0.2);
+  border: none;
+  background-color: #fff;
+  font-size: 17px;
+  padding: 0;
+}
+
+.red {
+  color: red;
+}
+
+footer a {
+  width: 24%;
+  margin: 0 auto;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.2);
+}
+
+footer a i {
+  display: block;
+  font-size: 35px;
+  padding: 30px 0;
+}
+/*# sourceMappingURL=style.css.map */
