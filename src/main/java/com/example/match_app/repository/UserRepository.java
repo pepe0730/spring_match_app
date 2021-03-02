@@ -10,4 +10,7 @@ import com.example.match_app.domain.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
   @Query("SELECT u FROM User u WHERE u.id != :id")
   List<User> findUsers(Integer id);
+
+  @Query("SELECT u FROM User u WHERE u.email = :email")
+  User findLoginUser(String email);
 }

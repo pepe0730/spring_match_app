@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form th:action="@{/login}" method="POST">
+    <h2>ログインフォーム</h2>
+    <div th:if="${param.error}">
+      メールアドレスまたはパスワードが正しくないです。
+    </div>
+    <input type="text" name="email" placeholder="@gmail.com" required="required" autofocus="autofocus ">
+    <input type="password" name="password" placeholder="password" required="required">
+    <button type="submit">sign in</button>
+  </form>
+</body>
+
+</html>
