@@ -5,19 +5,32 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
+
   <title>Document</title>
 </head>
 
 <body>
-  <form th:action="@{/login}" method="POST">
-    <h2>ログインフォーム</h2>
-    <div th:if="${param.error}">
-      メールアドレスまたはパスワードが正しくないです。
+  <main id="loginpage">
+    <div class="container">
+      <div class="app_name text-center">
+        <h1>Skil Match</h1>
+        <p>スキル交換プラットフォーム</p>
+        <img th:src="@{/image/loginpage.png}" alt="iPhone_top_image" width="300" height="350">
+      </div>
+      <form class="loginform" th:action="@{/login}" method="POST">
+        <h2>Let's Start</h2>
+        <div th:if="${param.error}">
+          メールアドレスまたはパスワードが正しくないです。
+        </div>
+        <input type="text" name="email" placeholder="@gmail.com" required="required" autofocus="autofocus">
+        <input type="password" name="password" placeholder="password" required="required">
+        <button class="btn btn-success" type="submit">sign in</button>
+      </form>
     </div>
-    <input type="text" name="email" placeholder="@gmail.com" required="required" autofocus="autofocus ">
-    <input type="password" name="password" placeholder="password" required="required">
-    <button type="submit">sign in</button>
-  </form>
+  </main>
 </body>
 
 </html>

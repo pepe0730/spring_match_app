@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.Pbkdf2PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/webjars/**", "/css/**");
+    web.ignoring().antMatchers("/webjars/**", "/css/**", "/image/**");
   }
 
   @Override

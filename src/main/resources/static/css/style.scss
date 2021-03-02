@@ -12,6 +12,50 @@ body {
 		flex: 1;
 	}
 }
+$shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+
+#loginpage {
+	background-color: #ffc629;
+	height: 100vh;
+}
+
+.app_name {
+	color: white;
+	margin-top: 80px;
+	font-family: "Helvetica", "Arial", "Hiragino Kaku Gothic ProN",
+		"ヒラギノ角ゴ ProN W3", "メイリオ", Meiryo, "ＭＳ Ｐゴシック",
+		"MS PGothic" sans-serif;
+	p {
+		margin-bottom: 0;
+	}
+	text-shadow: $shadow;
+}
+
+.loginform {
+	text-shadow: $shadow;
+	color: white;
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+	input {
+		display: block;
+		line-height: 40px;
+		height: 40px;
+		width: 90%;
+		margin: 20px auto;
+		background-color: #fff;
+		border-radius: 20px;
+		border: 1px solid rgba(72, 247, 133, 0.1);
+		&:focus {
+			outline: 0;
+		}
+	}
+	button {
+		height: 40px;
+		width: 100px;
+	}
+}
+
 .search-wrapper {
 	margin: 60px auto;
 	width: 90%;
