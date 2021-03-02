@@ -1,6 +1,7 @@
 package com.example.match_app.domain;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -9,12 +10,14 @@ import javax.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+@ToString(exclude = "followed_tags")
 public class User {
   @Id
   @Column(name = "id")
@@ -38,5 +41,6 @@ public class User {
   private Timestamp updated_at;
   @Column(name = "authority", nullable = false)
   private Integer authority;
-
+  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
+  private List<TagsRelations> followed_tags;
 }
