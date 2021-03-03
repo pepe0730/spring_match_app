@@ -1,7 +1,6 @@
 package com.example.match_app.domain;
 
 import lombok.NoArgsConstructor;
-import net.bytebuddy.agent.builder.AgentBuilder.Identified;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

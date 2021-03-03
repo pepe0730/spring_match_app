@@ -24,7 +24,7 @@ body main {
           flex: 1;
 }
 
-#loginpage {
+.login {
   background-color: #ffc629;
   height: 100vh;
 }
@@ -66,6 +66,11 @@ body main {
 .loginform button {
   height: 40px;
   width: 100px;
+}
+
+.section {
+  color: white;
+  margin-top: 80px;
 }
 
 .search-wrapper {

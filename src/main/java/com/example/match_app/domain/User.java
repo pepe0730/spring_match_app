@@ -40,7 +40,7 @@ public class User {
   @Column(name = "updated_at", nullable = false)
   private Timestamp updated_at;
   @Column(name = "authority", nullable = false)
-  private Integer authority;
+  private String authority;
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
   private List<TagsRelations> followed_tags;
 }

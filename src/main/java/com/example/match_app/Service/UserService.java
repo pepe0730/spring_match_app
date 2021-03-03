@@ -23,4 +23,8 @@ public class UserService {
   public List<User> findUsers(Integer id) {
     return userRepository.findUsers(id);
   }
+
+  public User create(User user) {
+    return userRepository.save(user);
+  }
 }

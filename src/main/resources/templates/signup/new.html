@@ -1,15 +1,52 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <title>Skill match</title>
 </head>
 
 <body>
-
+  <main class="login">
+    <div class="container">
+      <div class="section text-center">
+        <h2>Sign Up</h2>
+        <p>Please enter your profile.</p>
+      </div>
+      <form action="#" th:action="@{/signup/create}" method="POST" th:object="${userForm}">
+        <div class="input-wrapper">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" th:field="*{email}" th:errorclass="error-input"
+            placeholder="xxx@gmail.com" required="required">
+          <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</p>
+        </div>
+        <div class="input-wrapper">
+          <label for="password">Password</label>
+          <input type="text" id="password" name="password" th:field="*{password}" th:errorclass="error-input"
+            placeholder="Please Your Password" required="required">
+          <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</p>
+        </div>
+        <div class="input-wrapper">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" th:field="*{name}" th:errorclass="error-input" placeholder="ニックネーム可"
+            required="required">
+          <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</p>
+        </div>
+        <div class="input-wrapper">
+          <label for="age">Age</label>
+          <input type="text" id="age" name="age" th:field="*{age}" th:errorclass="error-input" placeholder="半角数字 1~100"
+            required="required">
+          <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</p>
+        </div>
+        <input type="hidden" id="authority" name="authority" value="user" th:field="*{authority}">
+        <button type="submit">新規作成</button>
+      </form>
+    </div>
+  </main>
 </body>
 
 </html>
