@@ -7,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
   <title>Skill match</title>
 </head>
 
@@ -17,33 +18,33 @@
         <h2>Sign Up</h2>
         <p>Please enter your profile.</p>
       </div>
-      <form action="#" th:action="@{/signup/create}" method="POST" th:object="${userForm}">
+      <form class="user-editor" action="#" th:action="@{/signup/create}" method="POST" th:object="${userForm}">
         <div class="input-wrapper">
-          <label for="email">Email</label>
+          <label for="email"><i class="fas fa-paper-plane"></i>Email</label>
           <input type="text" id="email" name="email" th:field="*{email}" th:errorclass="error-input"
             placeholder="xxx@gmail.com" required="required">
           <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</p>
         </div>
         <div class="input-wrapper">
-          <label for="password">Password</label>
+          <label for="password"><i class="fas fa-user-lock"></i>Password</label>
           <input type="text" id="password" name="password" th:field="*{password}" th:errorclass="error-input"
             placeholder="Please Your Password" required="required">
           <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</p>
         </div>
         <div class="input-wrapper">
-          <label for="name">Name</label>
+          <label for="name"><i class="far fa-address-book"></i>Name</label>
           <input type="text" id="name" name="name" th:field="*{name}" th:errorclass="error-input" placeholder="ニックネーム可"
             required="required">
           <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}">name error</p>
         </div>
         <div class="input-wrapper">
-          <label for="age">Age</label>
+          <label for="age"><i class="fas fa-sort-numeric-down"></i>Age</label>
           <input type="text" id="age" name="age" th:field="*{age}" th:errorclass="error-input" placeholder="半角数字 1~100"
             required="required">
           <p th:if="${#fields.hasErrors('age')}" th:errors="*{age}">age error</p>
         </div>
         <input type="hidden" id="authority" name="authority" value="user" th:field="*{authority}">
-        <button type="submit">新規作成</button>
+        <button type="submit" class="btn btn-success">新規作成</button>
       </form>
     </div>
   </main>
