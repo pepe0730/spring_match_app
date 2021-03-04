@@ -41,6 +41,7 @@ public class SignUpController {
   String getTag(Model model) {
     List<Tag> tags = tagService.findAll();
     model.addAttribute("tags", tags);
+    model.addAttribute("setTags", new SetTags());
     return "signup/getTag";
   }
 

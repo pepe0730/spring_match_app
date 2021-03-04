@@ -99,6 +99,49 @@ $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 	}
 }
 
+/* getTag */
+.getTag {
+	margin: 60px auto 30px auto;
+	.tags {
+		display: flex;
+		list-style: none;
+		flex-wrap: wrap;
+		text-align: center;
+		padding: 0;
+		.tag {
+			margin: 10px 10px;
+		}
+	}
+	input[type="checkbox"] {
+		display: none;
+	}
+	label {
+		cursor: pointer;
+		border: 2px solid rgb(41, 41, 41);
+		border-radius: 20px;
+		background-color: rgb(41, 41, 41);
+		color: white;
+		opacity: 0.6;
+		transition: all 0.3s;
+		display: inline-block;
+		padding: 10px 20px;
+		text-align: center;
+	}
+	input[type="checkbox"]:checked + input + label {
+		opacity: 1;
+		box-shadow: $shadow;
+		animation: big 0.3s;
+	}
+	@keyframes big {
+		0% {
+			transform: scale(1);
+		}
+		100% {
+			transform: scale(1.2);
+		}
+	}
+}
+
 .search-wrapper {
 	margin: 60px auto;
 	width: 90%;

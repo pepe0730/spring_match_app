@@ -118,6 +118,74 @@ body main {
   display: block;
 }
 
+/* getTag */
+.getTag {
+  margin: 60px auto 30px auto;
+}
+
+.getTag .tags {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style: none;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  text-align: center;
+  padding: 0;
+}
+
+.getTag .tags .tag {
+  margin: 10px 10px;
+}
+
+.getTag input[type="checkbox"] {
+  display: none;
+}
+
+.getTag label {
+  cursor: pointer;
+  border: 2px solid #292929;
+  border-radius: 20px;
+  background-color: #292929;
+  color: white;
+  opacity: 0.6;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  display: inline-block;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+.getTag input[type="checkbox"]:checked + input + label {
+  opacity: 1;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  -webkit-animation: big 0.3s;
+          animation: big 0.3s;
+}
+
+@-webkit-keyframes big {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+}
+
+@keyframes big {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+  100% {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
+}
+
 .search-wrapper {
   margin: 60px auto;
   width: 90%;

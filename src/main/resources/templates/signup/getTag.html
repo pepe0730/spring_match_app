@@ -5,14 +5,33 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
   <title>Document</title>
 </head>
 
 <body>
-  テストです。
-  <ul th:each="tag : ${tags}">
-    <li th:text=${tag.name}></li>
-  </ul>
+  <main class="login">
+    <div class="container">
+      <div class="section text-center">
+        <h2>Get Tags</h2>
+        <p>Get your favorite tags.</p>
+      </div>
+      <form action="#" method="post" th:action="@{/signup/tagRelated}" th:object="${setTags}" class="getTag">
+        <ul class="tags">
+          <li class="tag" th:each="tag : ${tags}">
+            <input type="checkbox" th:value="${tag.id}" th:id="${#ids.seq('tag')}" th:field="${setTags.tagIds}">
+            <label th:for="${#ids.prev('tag')}" th:text="${tag.name}"></label>
+          </li>
+        </ul>
+        <button class="btn btn-success d-block mx-auto">Followed Tag</button>
+      </form>
+      <form action="#" th:action="@{/loginForm}" method="get">
+        <button class="btn btn-primary mx-auto d-block">Skip</button>
+      </form>
+    </div>
+  </main>
 </body>
 
 </html>
