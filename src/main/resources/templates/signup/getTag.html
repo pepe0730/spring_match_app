@@ -25,6 +25,7 @@
             <label th:for="${#ids.prev('tag')}" th:text="${tag.name}"></label>
           </li>
         </ul>
+        <input type="hidden" th:name="userId" th:id="userId" th:value="${user_id}">
         <button class="btn btn-success d-block mx-auto">Followed Tag</button>
       </form>
       <form action="#" th:action="@{/loginForm}" method="get">

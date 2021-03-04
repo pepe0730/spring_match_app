@@ -27,6 +27,10 @@ public class UserService {
     return userRepository.findUsers(id);
   }
 
+  public User findOne(Integer id) {
+    return userRepository.findOne(id);
+  }
+
   public User create(User user) {
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     return userRepository.save(user);
