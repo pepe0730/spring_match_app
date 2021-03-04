@@ -11,7 +11,6 @@ import com.example.match_app.domain.Tag;
 
 import com.example.match_app.domain.User;
 
-import org.hibernate.boot.model.source.internal.hbm.ModelBinder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
