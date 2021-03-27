@@ -32,7 +32,10 @@
       </table>
     </div>
   </main>
-  <div th:replace="/commons/footer::footer1"></div>
+  <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/message'}, show=${'/users/show'}">
+    <div th:replace="/commons/footer::footer1"></div>
+  </th:block>
+
 </body>
 
 </html>

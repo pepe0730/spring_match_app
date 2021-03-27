@@ -2,10 +2,10 @@
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <footer th:fragment="footer1">
   <div class="icon-wrapper d-flex">
-    <a href="#" class="d-block"><i class="fas fa-search"></i></a>
-    <a href="#" class="d-block"><i class="fas fa-thumbs-up"></i></a>
-    <a href="#" class="d-block"><i class="fas fa-comment-dots"></i></a>
-    <a href="#" class="d-block"><i class="far fa-user-circle"></i></a>
+    <a href="#" th:href="@{${top}}" class="d-block"><i class="fas fa-search"></i></a>
+    <a href="#" th:href="@{${liked}}" class="d-block"><i class="fas fa-thumbs-up"></i></a>
+    <a href="#" th:href="@{${message}}" class="d-block"><i class="fas fa-comment-dots"></i></a>
+    <a href="#" th:href="@{${show}}" class="d-block"><i class="far fa-user-circle"></i></a>
   </div>
 </footer>
 

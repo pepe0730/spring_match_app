@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <div class="container show-container">
+      <div class="user-icon">
+        <p>ユーザアイコン</p>
+      </div>
+      <h3 class="username">
+        <span sec:authentication="principal.user.name"></span>
+        <span sec:authentication="principal.user.age"></span>歳
+      </h3>
+      <div class="profile">
+        <small>プロフィール</small>
+        <div class="profile-wrapper">
+          <p sec:authentication="principal.user.profile"></p>
+        </div>
+      </div>
+      <form th:action="@{edit}" action="#" method="get">
+        <input type="hidden" name="key" th:value="${key}">
+        <button type="submit" class="btn btn-primary btn-lg">編集する</button>
+      </form>
+    </div>
+  </main>
+  <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/message'}, show=${'show'}">
+    <div th:replace="/commons/footer::footer1"></div>
+  </th:block>
+
+</body>
+
+</html>
