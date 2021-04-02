@@ -231,25 +231,38 @@ body main {
 }
 
 .show-container .user-icon {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin: 40px auto;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
-.show-container .username {
+.show-container .user-icon img {
+  width: 40%;
+  height: auto;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.show-container .profile-wrapper {
+  margin-top: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.username {
   margin-bottom: 50px;
 }
 
-.show-container .username span:first-child {
+.username span:first-child {
   margin-right: 30px;
 }
 
-.show-container .profile {
+.profile {
   margin-bottom: 50px;
 }
 
-.show-container .profile small {
+.profile small {
   color: white;
   background-color: #ffc629;
   opacity: 0.8;
@@ -259,7 +272,7 @@ body main {
   font-size: 13px;
 }
 
-.show-container button {
+button {
   display: block;
   margin: auto;
 }

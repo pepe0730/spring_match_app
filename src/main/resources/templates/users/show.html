@@ -18,7 +18,6 @@
     <div class="container show-container">
       <div class="user-icon">
         <img src="sample.jpg" th:src="${'data:' + image.extension + ';base64,' + image.base64string}" />
-        <p>ユーザアイコン</p>
       </div>
       <h3 class="username">
         <span sec:authentication="principal.user.name"></span>
