@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 
 //返り値は遷移する画面の名前
 @Controller
@@ -98,6 +99,20 @@ public class UserController {
       imageService.updateImage(user_id, original_name, data);
     } catch (IOException e) {
     }
+    return "redirect:show";
+  }
+
+  // ユーザ情報更新
+  @PostMapping(value = "update")
+  String update(@Validated UserForm form, BindingResult result, Model model, Principal principal) {
+    if (result.hasErrors()) {
+      return "redirect: edit";
+    }
+    Authentication auth = (Authentication) principal;
+    LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    User user = LoginUser.getUser();
+    BeanUtils.copyProperties(form, user);
+    userService.update(user.getId(), user.getName(), user.getProfile(), user.getId());
     return "redirect:show";
   }
 

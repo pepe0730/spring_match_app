@@ -28,6 +28,7 @@
           <button class="btn btn-dark my-3">Image set</button>
         </div>
       </form>
+      <!-- ユーザ情報編集 -->
       <form action="#" class="user-editor" th:action="@{update}" method="post" th:object="${userForm}">
         <div class="input-wrapper">
           <label for="name">名前</label>
@@ -44,6 +45,9 @@
           <textarea name="profile" id="profile" cols="30" rows="10" th:text="*{profile}">
           </textarea>
         </div>
+        <input type="hidden" name="password" id="password" th:field="*{password}">
+        <input type="hidden" name="email" id="email" th:field="*{email}">
+        <input type="hidden" name="authority" id="authority" th:field="*{authority}">
         <button type="submit" class="btn btn-lg btn-primary">Submit</button>
       </form>
 

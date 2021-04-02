@@ -1,5 +1,6 @@
 package com.example.match_app.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.example.match_app.domain.User;
@@ -39,5 +40,10 @@ public class UserService {
   public User create(User user) {
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     return userRepository.save(user);
+  }
+
+  public Integer update(Integer id, String name, String profile, Integer age) {
+    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    return userRepository.updateUser(id, name, age, profile, currentTime);
   }
 }
