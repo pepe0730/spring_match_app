@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <main class="edit">
+    <div class="container">
+      <div class="section text-center text-dark">
+        <h2>Edit User</h2>
+        <p>Please enter your profile.</p>
+      </div>
+      <!-- 画像登録 -->
+      <form th:action="@{imageConfig}" class="user-editor" method="POST" th:object="${userImageForm}"
+        enctype="multipart/form-data">
+        <div class="input-wrapper">
+          <label for="name">ユーザアイコン</label>
+          <input type="file" class="file-input" th:field="*{image}">
+          <button class="btn btn-dark my-3">Image set</button>
+        </div>
+      </form>
+      <form action="#" class="user-editor" th:action="@{update}" method="post" th:field="${userForm}">
+        <div class="input-wrapper">
+          <label for="name">名前</label>
+          <input type="text" name="name" th:value="*{name}">
+        </div>
+        <div class="input-wrapper">
+          <label for="age">年齢</label>
+          <input type="text" name="age" th:value="*{age}">
+        </div>
+        <div class="input-wrapper">
+          <label for="profile">プロフィール</label>
+          <textarea name="profile" id="profile" cols="30" rows="10" th:value="*{profile}"></textarea>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+      </form>
+
+    </div>
+  </main>
+  <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/message'}, show=${'/users/show'}">
+    <div th:replace="/commons/footer::footer1"></div>
+  </th:block>
+</body>
+
+</html>

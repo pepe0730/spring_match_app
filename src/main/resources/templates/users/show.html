@@ -17,6 +17,7 @@
   <main>
     <div class="container show-container">
       <div class="user-icon">
+        <img src="sample.jpg" th:src="${'data:' + image.extension + ';base64,' + image.base64string}" />
         <p>ユーザアイコン</p>
       </div>
       <h3 class="username">
@@ -30,7 +31,6 @@
         </div>
       </div>
       <form th:action="@{edit}" action="#" method="get">
-        <input type="hidden" name="key" th:value="${key}">
         <button type="submit" class="btn btn-primary btn-lg">編集する</button>
       </form>
     </div>

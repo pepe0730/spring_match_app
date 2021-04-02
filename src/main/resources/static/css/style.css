@@ -264,6 +264,33 @@ body main {
   margin: auto;
 }
 
+/* user edit */
+.edit .user-editor .input-wrapper label {
+  color: #333;
+}
+
+.edit .user-editor .input-wrapper .file-input {
+  border: none;
+  border-radius: 0%;
+  height: auto;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.edit .user-editor .input-wrapper textarea {
+  border: 1px solid rgba(72, 247, 133, 0.1);
+  border-radius: 10px;
+  width: 100%;
+  -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  resize: none;
+  font-size: 12px;
+}
+
+.edit .user-editor .input-wrapper textarea:focus {
+  outline: 0;
+}
+
 footer a {
   width: 24%;
   margin: 0 auto;

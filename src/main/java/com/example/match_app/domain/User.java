@@ -29,9 +29,7 @@ public class User {
   private String email;
   @Column(name = "password", nullable = false)
   private String password;
-  @Column(name = "image")
-  private byte[] image;
-  @Column(name = "age", nullable = false)
+  @Column(name = "age")
   private Integer age;
   @Column(name = "profile")
   private String profile;

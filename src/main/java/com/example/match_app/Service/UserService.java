@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
   @Autowired
   UserRepository userRepository;
+
   @Autowired
   PasswordEncoder passwordEncoder;
 
@@ -29,6 +30,10 @@ public class UserService {
 
   public User findOne(Integer id) {
     return userRepository.findOne(id);
+  }
+
+  public User getLoginUser(String email) {
+    return userRepository.findLoginUser(email);
   }
 
   public User create(User user) {

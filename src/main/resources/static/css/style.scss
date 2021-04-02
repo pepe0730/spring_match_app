@@ -211,6 +211,34 @@ $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 	}
 }
 
+/* user edit */
+.edit {
+	.user-editor {
+		.input-wrapper {
+			label {
+				color: #333;
+			}
+			.file-input {
+				border: none;
+				border-radius: 0%;
+				height: auto;
+				box-shadow: none;
+			}
+			textarea {
+				border: 1px solid rgba(72, 247, 133, 0.1);
+				border-radius: 10px;
+				width: 100%;
+				box-shadow: $shadow;
+				resize: none;
+				font-size: 12px;
+				&:focus {
+					outline: 0;
+				}
+			}
+		}
+	}
+}
+
 footer {
 	a {
 		width: 24%;
