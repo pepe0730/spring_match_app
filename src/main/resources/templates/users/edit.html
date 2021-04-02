@@ -24,22 +24,25 @@
         enctype="multipart/form-data">
         <div class="input-wrapper">
           <label for="name">ユーザアイコン</label>
-          <input type="file" class="file-input" th:field="*{image}">
+          <input type="file" class="file-input" th:field="${userImageForm.image}">
           <button class="btn btn-dark my-3">Image set</button>
         </div>
       </form>
-      <form action="#" class="user-editor" th:action="@{update}" method="post" th:field="${userForm}">
+      <form action="#" class="user-editor" th:action="@{update}" method="post" th:object="${userForm}">
         <div class="input-wrapper">
           <label for="name">名前</label>
-          <input type="text" name="name" th:value="*{name}">
+          <input type="text" name="name" th:field="*{name}" value="太郎" th:errorclass="error-input">
+          <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error-messages">名前を正しく入力してください</span>
         </div>
         <div class="input-wrapper">
           <label for="age">年齢</label>
-          <input type="text" name="age" th:value="*{age}">
+          <input type="text" name="age" th:field="*{age}" th:errorclass="error-input">
+          <span th:if="${#fields.hasErrors('age')}" th:errors=*{age} class="error-messages">年齢を半角数字で正しく入力してください</span>
         </div>
         <div class="input-wrapper">
           <label for="profile">プロフィール</label>
-          <textarea name="profile" id="profile" cols="30" rows="10" th:value="*{profile}"></textarea>
+          <textarea name="profile" id="profile" cols="30" rows="10" th:text="*{profile}">
+          </textarea>
         </div>
         <button type="submit" class="btn btn-lg btn-primary">Submit</button>
       </form>

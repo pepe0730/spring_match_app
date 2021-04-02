@@ -12,6 +12,7 @@ import com.example.match_app.domain.Image;
 import com.example.match_app.domain.User;
 import com.example.match_app.repository.UserRepository;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,11 +65,21 @@ public class UserController {
   }
 
   @GetMapping(path = "edit")
-  String edit(Model model, Principal principal) {
+  String edit(Principal principal, UserForm form, userImageForm imageForm) {
     Authentication auth = (Authentication) principal;
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
-    model.addAttribute("user", LoginUser);
-    model.addAttribute("userImageForm", new userImageForm());
+    Image image = imageService.findUserImage(LoginUser.getUser().getId());
+    if (image != null) {
+      // 拡張子を取得
+      image.setExtension(
+          image.getOriginal_name().substring(image.getOriginal_name().length() - 4, image.getOriginal_name().length()));
+      // byte → Base64に変換(java.util)
+      image.setBase64string(Base64.getEncoder().encodeToString(image.getData()));
+      // byte削除
+      image.setData(null);
+    }
+    BeanUtils.copyProperties(LoginUser.getUser(), form);
+    BeanUtils.copyProperties(image, imageForm);
     return "users/edit";
   }
 
@@ -87,21 +98,6 @@ public class UserController {
       imageService.updateImage(user_id, original_name, data);
     } catch (IOException e) {
     }
-    /*
-     * String imageCreate(@Validated userImageForm imageForm, BindingResult result,
-     * Model model) { if (result.hasErrors()) { return edit(imageForm.getUserId(),
-     * model); } try { System.out.println(imageForm.getImage().getBytes());
-     * System.out.println(imageForm.getUserId()); User user =
-     * userService.findOne(Integer.parseInt(imageForm.getUserId()));
-     * 
-     * byte[] ImageBinary = new byte[(int) (imageForm.getImage().getSize())];
-     * ImageBinary = imageForm.getImage().getBytes(); user.setImage(ImageBinary);
-     * userService.create(user);
-     * 
-     * } catch (IOException e) { }
-     */
-
-    /* StringBuffer data = new StringBuffer(); */
     return "redirect:show";
   }
 
