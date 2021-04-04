@@ -24,6 +24,17 @@ body main {
           flex: 1;
 }
 
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  margin: 0;
+  padding: 0;
+}
+
 .login {
   background-color: #ffc629;
   height: 100vh;
@@ -186,6 +197,7 @@ body main {
   }
 }
 
+/* index main page */
 .search-wrapper {
   margin: 60px auto;
   width: 90%;
@@ -225,6 +237,18 @@ body main {
   color: red;
 }
 
+.user-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.user-list li {
+  width: 50%;
+}
+
 /* main page user show */
 .show-container {
   width: 75%;
@@ -236,9 +260,11 @@ body main {
   text-align: center;
 }
 
-.show-container .user-icon img {
-  width: 40%;
-  height: auto;
+.show-container .user-icon .userImage {
+  width: 200px;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
   margin: 0 auto;
 }

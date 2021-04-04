@@ -10,12 +10,10 @@ import com.example.match_app.Service.LoginUserDetails;
 import com.example.match_app.Service.UserService;
 import com.example.match_app.domain.Image;
 import com.example.match_app.domain.User;
-import com.example.match_app.repository.UserRepository;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +21,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 //返り値は遷移する画面の名前
 @Controller
@@ -37,17 +33,19 @@ public class UserController {
   ImageService imageService;
 
   @GetMapping // Modelは画面に値を渡すオブジェクト
-  String allList(Model model) {
-    // 今はログインユーザなしなので全件取得
-    List<User> users = userService.findAll();
+  String allList(Model model, Principal principal) {
+    Authentication auth = (Authentication) principal;
+    LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    List<User> users = userService.findUsers(LoginUser.getUser().getId());
+    /*
+     * for(User user: users) { if (user.getImage() != null) { image. } }
+     */
     model.addAttribute("users", users);
     return "users/index";
   }
 
   @GetMapping(path = "show")
   String show(Model model, Principal principal) {
-    // Authentication principal =
-    // SecurityContextHolder.getContext().getAuthentication();
     Authentication auth = (Authentication) principal;
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
     Image image = imageService.findUserImage(LoginUser.getUser().getId());
@@ -78,9 +76,12 @@ public class UserController {
       image.setBase64string(Base64.getEncoder().encodeToString(image.getData()));
       // byte削除
       image.setData(null);
+      BeanUtils.copyProperties(image, imageForm);
+    } else {
+      Image newImage = new Image();
+      BeanUtils.copyProperties(imageForm, newImage);
     }
     BeanUtils.copyProperties(LoginUser.getUser(), form);
-    BeanUtils.copyProperties(image, imageForm);
     return "users/edit";
   }
 
@@ -89,6 +90,7 @@ public class UserController {
   String imageCreate(@Validated userImageForm imageForm, BindingResult result, Model model, Principal principal) {
     Authentication auth = (Authentication) principal;
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    User loginUser = LoginUser.getUser();
     if (result.hasErrors()) {
       return "redirect:edit";
     }
@@ -96,7 +98,16 @@ public class UserController {
       String original_name = imageForm.getImage().getOriginalFilename();
       byte[] data = imageForm.getImage().getBytes();
       Integer user_id = LoginUser.getUser().getId();
-      imageService.updateImage(user_id, original_name, data);
+      if (loginUser.getImage() == null) {
+        // cerate
+        Image uploadImage = imageService.create(user_id, original_name, data, loginUser);
+        //user image 連携(初回登録時のみ)
+        loginUser.setImage(uploadImage);
+        userService.defaultUpdate(loginUser);
+      } else {
+        // update image dataの更新のみ行う。
+        imageService.updateImage(user_id, original_name, data);
+      }
     } catch (IOException e) {
     }
     return "redirect:show";

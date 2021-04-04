@@ -15,8 +15,6 @@
 <body>
   <main>
     <div class="container">
-
-
       <div class="search-wrapper">
         <h2>さがす</h2>
         <form method="get">
@@ -24,12 +22,15 @@
           <button><i class="fas fa-search"></i></button>
         </form>
       </div>
-      <table>
-        <tr th:each="user: ${users}">
-          <td class="red" th:text="${user.name}"></td>
-          <td th:text="${user.profile}"></td>
-        </tr>
-      </table>
+      <ul class="user-list">
+        <th:block th:each="user: ${users}">
+          <li>
+            
+            <p class="red" th:text="${user.name}"></p>
+            <p th:text="${user.profile}"></p>
+          </li>
+        </th:block>
+      </ul>
     </div>
   </main>
   <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/message'}, show=${'/users/show'}">

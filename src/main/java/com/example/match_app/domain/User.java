@@ -41,4 +41,7 @@ public class User {
   private String authority;
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")
   private List<TagsRelations> followed_tags;
+  @OneToOne
+  @JoinColumn(name = "image_id")
+  private Image image;
 }

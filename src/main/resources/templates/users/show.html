@@ -17,7 +17,11 @@
   <main>
     <div class="container show-container">
       <div class="user-icon">
-        <img src="sample.jpg" th:src="${'data:' + image.extension + ';base64,' + image.base64string}" />
+        <th:block th:if="${image != null}">
+          <img class="userImage" src="sample.jpg"
+            th:src="${'data:' + image.extension + ';base64,' + image.base64string}" />
+        </th:block>
+
       </div>
       <h3 class="username">
         <span sec:authentication="principal.user.name"></span>

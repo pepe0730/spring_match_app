@@ -12,6 +12,15 @@ body {
 		flex: 1;
 	}
 }
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	li {
+		margin: 0;
+		padding: 0;
+	}
+}
 $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 
 .login {
@@ -142,6 +151,7 @@ $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 	}
 }
 
+/* index main page */
 .search-wrapper {
 	margin: 60px auto;
 	width: 90%;
@@ -175,6 +185,13 @@ $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 .red {
 	color: red;
 }
+.user-list {
+	display: flex;
+	flex-wrap: wrap;
+	li {
+		width: 50%;
+	}
+}
 
 /* main page user show */
 .show-container {
@@ -183,9 +200,10 @@ $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 		margin-top: 80px;
 		margin-bottom: 30px;
 		text-align: center;
-		img {
-			width: 40%;
-			height: auto;
+		.userImage {
+			width: 200px;
+			height: 200px;
+			object-fit: cover;
 			border-radius: 50%;
 			margin: 0 auto;
 		}
