@@ -25,9 +25,13 @@
       <ul class="user-list">
         <th:block th:each="user: ${users}">
           <li>
-            
-            <p class="red" th:text="${user.name}"></p>
-            <p th:text="${user.profile}"></p>
+            <div class="user-icon">
+              <th:block th:if="${user.image != null}">
+                <img class="userImage" src="sample.jpg"
+                  th:src="${'data:' + user.image.extension + ';base64,' + user.image.base64string}" />
+              </th:block>
+            </div>
+            <p><span class="user-name" th:text="${user.name}"></span><span th:text="${user.age}"></span>歳</p>
           </li>
         </th:block>
       </ul>
