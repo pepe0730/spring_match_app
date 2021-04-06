@@ -35,6 +35,10 @@ ul li {
   padding: 0;
 }
 
+a {
+  color: #333;
+}
+
 .login {
   background-color: #ffc629;
   height: 100vh;
@@ -247,6 +251,31 @@ ul li {
 
 .user-list li {
   width: 50%;
+  margin-bottom: 30px;
+}
+
+.user-list li .user-icon {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-list li .user-icon .userImage {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.user-list li p {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.user-list li p .user-name {
+  margin-right: 50px;
 }
 
 /* main page user show */

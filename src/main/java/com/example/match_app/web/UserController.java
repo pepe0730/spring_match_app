@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 // マッピング
 @RequestMapping("users")
+
 public class UserController {
   @Autowired
   UserService userService;
@@ -37,11 +39,26 @@ public class UserController {
     Authentication auth = (Authentication) principal;
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
     List<User> users = userService.findUsers(LoginUser.getUser().getId());
-    /*
-     * for(User user: users) { if (user.getImage() != null) { image. } }
-     */
+    for (User user : users) {
+      if (user.getImage() != null) {
+        user.setImage(changeBase64String(user.getImage()));
+      }
+    }
     model.addAttribute("users", users);
     return "users/index";
+  }
+
+  @GetMapping(path = "showOtherUser/{userId}")
+  String showOtherUser(@PathVariable("userId") String id, Model model) {
+    Integer user_id = Integer.parseInt(id);
+    User user = userService.findOne(user_id);
+    Image image = user.getImage();
+    if (image != null) {
+      changeBase64String(image);
+      model.addAttribute("image", image);
+    }
+    model.addAttribute("user", user);
+    return "users/showOtherUser";
   }
 
   @GetMapping(path = "show")
@@ -50,13 +67,7 @@ public class UserController {
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
     Image image = imageService.findUserImage(LoginUser.getUser().getId());
     if (image != null) {
-      // 拡張子を取得
-      image.setExtension(
-          image.getOriginal_name().substring(image.getOriginal_name().length() - 4, image.getOriginal_name().length()));
-      // byte → Base64に変換(java.util)
-      image.setBase64string(Base64.getEncoder().encodeToString(image.getData()));
-      // byte削除
-      image.setData(null);
+      changeBase64String(image);
       model.addAttribute("image", image);
     }
     // model.addAttribute("key", principal.getName());
@@ -69,13 +80,8 @@ public class UserController {
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
     Image image = imageService.findUserImage(LoginUser.getUser().getId());
     if (image != null) {
-      // 拡張子を取得
-      image.setExtension(
-          image.getOriginal_name().substring(image.getOriginal_name().length() - 4, image.getOriginal_name().length()));
-      // byte → Base64に変換(java.util)
-      image.setBase64string(Base64.getEncoder().encodeToString(image.getData()));
-      // byte削除
-      image.setData(null);
+      // Base64変換
+      changeBase64String(image);
       BeanUtils.copyProperties(image, imageForm);
     } else {
       Image newImage = new Image();
@@ -101,7 +107,7 @@ public class UserController {
       if (loginUser.getImage() == null) {
         // cerate
         Image uploadImage = imageService.create(user_id, original_name, data, loginUser);
-        //user image 連携(初回登録時のみ)
+        // user image 連携(初回登録時のみ)
         loginUser.setImage(uploadImage);
         userService.defaultUpdate(loginUser);
       } else {
@@ -125,6 +131,18 @@ public class UserController {
     BeanUtils.copyProperties(form, user);
     userService.update(user.getId(), user.getName(), user.getProfile(), user.getId());
     return "redirect:show";
+  }
+
+  // Base64変換メソッド
+  public Image changeBase64String(Image image) {
+    // 拡張子取得
+    image.setExtension(
+        image.getOriginal_name().substring(image.getOriginal_name().length() - 4, image.getOriginal_name().length()));
+    // byte → Base64に変換(java.util)
+    image.setBase64string(Base64.getEncoder().encodeToString(image.getData()));
+    // byte削除
+    image.setData(null);
+    return image;
   }
 
 }

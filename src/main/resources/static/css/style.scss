@@ -21,6 +21,9 @@ ul {
 		padding: 0;
 	}
 }
+a {
+	color: #333;
+}
 $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 
 .login {
@@ -190,6 +193,26 @@ $shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
 	flex-wrap: wrap;
 	li {
 		width: 50%;
+		margin-bottom: 30px;
+		.user-icon {
+			text-align: center;
+			margin-bottom: 20px;
+			.userImage {
+				width: 150px;
+				height: 150px;
+				object-fit: cover;
+				border-radius: 50%;
+				margin: 0 auto;
+			}
+		}
+		p {
+			text-align: center;
+			font-weight: bold;
+			font-size: 20px;
+			.user-name {
+				margin-right: 50px;
+			}
+		}
 	}
 }
 
