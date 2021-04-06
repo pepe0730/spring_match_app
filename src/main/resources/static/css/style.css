@@ -384,4 +384,36 @@ footer a i {
   font-size: 35px;
   padding: 30px 0;
 }
+
+.messageList-container h2 {
+  margin: 60px 20px;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+  opacity: 0.7;
+}
+
+.messageList-container li {
+  height: 100px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.messageList-container li:last-child {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.messageList-container li img {
+  width: 60px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.messageList-container li p {
+  font-weight: bold;
+  line-height: 100px;
+  font-size: 20px;
+}
 /*# sourceMappingURL=style.css.map */
