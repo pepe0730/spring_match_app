@@ -2,6 +2,7 @@ package com.example.match_app.web;
 
 import java.io.IOException;
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.util.Base64;
 import java.util.List;
 
@@ -129,7 +130,10 @@ public class UserController {
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
     User user = LoginUser.getUser();
     BeanUtils.copyProperties(form, user);
-    userService.update(user.getId(), user.getName(), user.getProfile(), user.getId());
+    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    user.setUpdated_at(currentTime);
+    userService.update(user);
+    
     return "redirect:show";
   }
 

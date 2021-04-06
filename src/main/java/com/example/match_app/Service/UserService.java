@@ -47,8 +47,7 @@ public class UserService {
   }
 
   // User 基本情報 update
-  public Integer update(Integer id, String name, String profile, Integer age) {
-    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-    return userRepository.updateUser(id, name, age, profile, currentTime);
+  public User update(User user) {
+    return userRepository.save(user);
   }
 }
