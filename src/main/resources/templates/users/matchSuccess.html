@@ -1,15 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ja" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b24292ab52.js" crossorigin="anonymous"></script>
   <title>Document</title>
 </head>
 
 <body>
-  マッチ成功
+  <main>
+    <div class="container show-container">
+      <div class="user-icon">
+        <th:block th:if="${image != null}">
+          <img class="userImage" src="sample.jpg"
+            th:src="${'data:' + image.extension + ';base64,' + image.base64string}" />
+        </th:block>
+      </div>
+      <div class="matchsuccess-wrapper">
+        <h2>マッチ成功</h2>
+        <p>Match Success!!</p>
+        <a href="#" th:href="@{users/messages}" class="d-inline-block btn btn-success btn-lg">メッセージを送る</a>
+      </div>
+    </div>
+  </main>
+  <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/message'}, show=${'/users/show'}">
+    <div th:replace="/commons/footer::footer1"></div>
+  </th:block>
+
 </body>
 
 </html>

@@ -291,6 +291,19 @@ button {
 	}
 }
 
+/* match Success */
+
+.matchsuccess-wrapper {
+	margin-top: 60px;
+	text-align: center;
+	color: #ffc629;
+	font-weight: bold;
+	text-shadow: $shadow;
+	p {
+		margin-bottom: 70px;
+	}
+}
+
 footer {
 	a {
 		width: 24%;

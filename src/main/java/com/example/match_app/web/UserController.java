@@ -171,7 +171,13 @@ public class UserController {
 
   @GetMapping(path = "matchSuccess")
   String matchSuccess(Model model) {
-    model.addAttribute("user", model.getAttribute("opponent"));
+    User user = (User) model.getAttribute("opponent");
+    Image image = user.getImage();
+    if (image != null) {
+      changeBase64String(image);
+      model.addAttribute("image", image);
+    }
+    model.addAttribute("user", user);
     return "users/matchSuccess";
   }
 
