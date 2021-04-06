@@ -35,6 +35,10 @@ ul li {
   padding: 0;
 }
 
+a {
+  color: #333;
+}
+
 .login {
   background-color: #ffc629;
   height: 100vh;

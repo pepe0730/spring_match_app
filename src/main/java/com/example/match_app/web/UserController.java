@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 // マッピング
 @RequestMapping("users")
+
 public class UserController {
   @Autowired
   UserService userService;
@@ -44,6 +46,19 @@ public class UserController {
     }
     model.addAttribute("users", users);
     return "users/index";
+  }
+
+  @GetMapping(path = "showOtherUser/{userId}")
+  String showOtherUser(@PathVariable("userId") String id, Model model) {
+    Integer user_id = Integer.parseInt(id);
+    User user = userService.findOne(user_id);
+    Image image = user.getImage();
+    if (image != null) {
+      changeBase64String(image);
+      model.addAttribute("image", image);
+    }
+    model.addAttribute("user", user);
+    return "users/showOtherUser";
   }
 
   @GetMapping(path = "show")
