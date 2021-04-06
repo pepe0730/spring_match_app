@@ -34,7 +34,8 @@
         </div>
       </div>
       <form th:action="@{../follow}" action="#" method="post">
-        <button type="submit" class="btn btn-primary btn-lg">いいねを送る</button>
+        <input type="hidden" name="receiveId" th:value="${user.id}">
+        <button type="submit" class="btn btn-warning btn-lg">いいねを送る</button>
       </form>
     </div>
   </main>

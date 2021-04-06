@@ -6,8 +6,10 @@ import java.sql.Timestamp;
 import java.util.Base64;
 import java.util.List;
 
+import com.example.match_app.Service.FollowService;
 import com.example.match_app.Service.ImageService;
 import com.example.match_app.Service.LoginUserDetails;
+import com.example.match_app.Service.MatchService;
 import com.example.match_app.Service.UserService;
 import com.example.match_app.domain.Image;
 import com.example.match_app.domain.User;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 //返り値は遷移する画面の名前
 @Controller
@@ -34,6 +38,10 @@ public class UserController {
   UserService userService;
   @Autowired
   ImageService imageService;
+  @Autowired
+  FollowService followService;
+  @Autowired
+  MatchService matchService;
 
   @GetMapping // Modelは画面に値を渡すオブジェクト
   String allList(Model model, Principal principal) {
@@ -133,8 +141,38 @@ public class UserController {
     Timestamp currentTime = new Timestamp(System.currentTimeMillis());
     user.setUpdated_at(currentTime);
     userService.update(user);
-    
+
     return "redirect:show";
+  }
+
+  // いいねボタンクリック後
+  @PostMapping(value = "follow")
+  String follow(@RequestParam Integer receiveId, Principal principal, RedirectAttributes redirectAttributes) {
+    Authentication auth = (Authentication) principal;
+    LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    User loginUser = LoginUser.getUser();
+    User receiveUser = userService.findOne(receiveId);
+    // followService
+    followService.followCreate(receiveUser, loginUser);
+    try {
+      Long countMutual = followService.checkMutualFollow(receiveUser, loginUser);
+      // 相互フォロー確認
+      if (countMutual != 0) {
+        matchService.matchCreate(loginUser, receiveUser);
+        // リダイレクト先にマッチした相手のオブジェクトを渡す
+        redirectAttributes.addFlashAttribute("opponent", receiveUser);
+        return "redirect:matchSuccess";
+      }
+      return "redirect:";
+    } catch (NullPointerException e) {
+      return "redirect:";
+    }
+  }
+
+  @GetMapping(path = "matchSuccess")
+  String matchSuccess(Model model) {
+    model.addAttribute("user", model.getAttribute("opponent"));
+    return "users/matchSuccess";
   }
 
   // Base64変換メソッド
