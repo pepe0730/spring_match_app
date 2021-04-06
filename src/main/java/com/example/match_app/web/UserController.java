@@ -3,6 +3,7 @@ package com.example.match_app.web;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import com.example.match_app.Service.LoginUserDetails;
 import com.example.match_app.Service.MatchService;
 import com.example.match_app.Service.UserService;
 import com.example.match_app.domain.Image;
+import com.example.match_app.domain.Matches;
 import com.example.match_app.domain.User;
 
 import org.springframework.beans.BeanUtils;
@@ -179,6 +181,29 @@ public class UserController {
     }
     model.addAttribute("user", user);
     return "users/matchSuccess";
+  }
+
+  @GetMapping(path = "messageList")
+  String messageList(Model model, Principal principal) {
+    Authentication auth = (Authentication) principal;
+    LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    User loginUser = LoginUser.getUser();
+    List<Matches> matches = matchService.getMutualUsers(loginUser);
+    List<User> mulualUsers = new ArrayList<User>();
+    User mulualUser = new User();
+    for (Matches match : matches) {
+      if (match.getUser1().getId() == loginUser.getId()) {
+        mulualUser = match.getUser2();
+      } else if (match.getUser2().getId() == loginUser.getId()) {
+        mulualUser = match.getUser1();
+      }
+      if (mulualUser.getImage() != null) {
+        mulualUser.setImage(changeBase64String(mulualUser.getImage()));
+      }
+      mulualUsers.add(mulualUser);
+    }
+    model.addAttribute("matchUsers", mulualUsers);
+    return "users/messageList";
   }
 
   // Base64変換メソッド

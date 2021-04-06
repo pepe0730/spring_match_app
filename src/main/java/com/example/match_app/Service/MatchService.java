@@ -1,5 +1,7 @@
 package com.example.match_app.Service;
 
+import java.util.List;
+
 import com.example.match_app.domain.Matches;
 import com.example.match_app.domain.User;
 import com.example.match_app.repository.MatchRepository;
@@ -19,5 +21,9 @@ public class MatchService {
     matches.setUser1(user1);
     matches.setUser2(user2);
     matchRepository.save(matches);
+  }
+
+  public List<Matches> getMutualUsers(User user) {
+    return matchRepository.getMatcheUsers(user);
   }
 }
