@@ -11,9 +11,11 @@ import com.example.match_app.Service.FollowService;
 import com.example.match_app.Service.ImageService;
 import com.example.match_app.Service.LoginUserDetails;
 import com.example.match_app.Service.MatchService;
+import com.example.match_app.Service.MessageService;
 import com.example.match_app.Service.UserService;
 import com.example.match_app.domain.Image;
 import com.example.match_app.domain.Matches;
+import com.example.match_app.domain.Message;
 import com.example.match_app.domain.User;
 
 import org.springframework.beans.BeanUtils;
@@ -44,6 +46,8 @@ public class UserController {
   FollowService followService;
   @Autowired
   MatchService matchService;
+  @Autowired
+  MessageService messageService;
 
   @GetMapping // Modelは画面に値を渡すオブジェクト
   String allList(Model model, Principal principal) {
@@ -204,6 +208,22 @@ public class UserController {
     }
     model.addAttribute("matchUsers", mulualUsers);
     return "users/messageList";
+  }
+
+  @GetMapping(path = "talkroom/{userId}")
+  String getTalkroom(@PathVariable Integer userId, Model model, Principal principal) {
+    Authentication auth = (Authentication) principal;
+    LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    User loginUser = LoginUser.getUser();
+    User receiveUser = userService.findOne(userId);
+    List<Message> messages = new ArrayList<Message>();
+    try {
+      messages = messageService.getMessages(receiveUser, loginUser);
+    } catch (NullPointerException e) {
+    }
+    model.addAttribute("messages", messages);
+    model.addAttribute("loginUserId", loginUser.getId());
+    return "users/talkroom";
   }
 
   // Base64変換メソッド
