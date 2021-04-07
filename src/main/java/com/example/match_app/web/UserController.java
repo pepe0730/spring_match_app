@@ -211,7 +211,7 @@ public class UserController {
   }
 
   @GetMapping(path = "talkroom/{userId}")
-  String getTalkroom(@PathVariable Integer userId, Model model, Principal principal) {
+  String talkroom(@PathVariable Integer userId, Model model, Principal principal) {
     Authentication auth = (Authentication) principal;
     LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
     User loginUser = LoginUser.getUser();
@@ -223,7 +223,24 @@ public class UserController {
     }
     model.addAttribute("messages", messages);
     model.addAttribute("loginUserId", loginUser.getId());
+    model.addAttribute("receiveUserId", receiveUser.getId());
     return "users/talkroom";
+  }
+
+  // メッセージ送信
+  @PostMapping(path = "messageCreate")
+  String messageCreate(@Validated MessageForm messageForm, BindingResult result, Model model, Principal principal,
+      RedirectAttributes redirectAttributes) {
+    if (result.hasErrors()) {
+      return talkroom(messageForm.getReceiveUserId(), model, principal);
+    }
+    Authentication auth = (Authentication) principal;
+    LoginUserDetails LoginUser = (LoginUserDetails) auth.getPrincipal();
+    User loginUser = LoginUser.getUser();
+    User receiveUser = userService.findOne(messageForm.getReceiveUserId());
+    messageService.createMessage(loginUser, receiveUser, messageForm.getText());
+    redirectAttributes.addFlashAttribute("userId", receiveUser.getId());
+    return "redirect:talkroom/" + receiveUser.getId() + "";
   }
 
   // Base64変換メソッド
