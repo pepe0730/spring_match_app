@@ -385,6 +385,19 @@ footer a i {
   padding: 30px 0;
 }
 
+/* match Success */
+.matchsuccess-wrapper {
+  margin-top: 60px;
+  text-align: center;
+  color: #ffc629;
+  font-weight: bold;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.matchsuccess-wrapper p {
+  margin-bottom: 70px;
+}
+
 .messageList-container h2 {
   margin: 60px 20px;
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);

@@ -12,5 +12,4 @@ public interface MatchRepository extends JpaRepository<Matches, Integer> {
 
   @Query("SELECT m FROM Matches m WHERE m.user1 = :user or m.user2 = :user")
   List<Matches> getMatcheUsers(User user);
-
 }
