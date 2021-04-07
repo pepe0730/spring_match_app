@@ -19,7 +19,7 @@
       <div class="user-icon">
         <th:block th:if="${image != null}">
           <img class="userImage" src="sample.jpg"
-            th:src="${'data:' + image.extension + ';base64,' + image.base64string}" />
+            th:src="${'data:' + user.image.extension + ';base64,' + user.image.base64string}" />
         </th:block>
       </div>
       <div class="matchsuccess-wrapper">
