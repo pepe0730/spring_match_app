@@ -15,23 +15,8 @@
 
 <body>
   <main>
-    <div class="container messageList-container">
-      <h2>メッセージリスト</h2>
-      <div class="message-wrapper">
-        <ul>
-          <li class="row" th:each="user: ${matchUsers}">
-            <div class="image-wrapper col-3">
-              <img class="userImage" src="sample.jpg"
-                th:src="${'data:' + user.image.extension + ';base64,' + user.image.base64string}" />
-            </div>
-            <a href="#" class="col-9" th:href="@{talkroom/{userId}(userId=${user.id})}">
-              <p th:text="${user.name}"></p>
-            </a>
-          </li>
-        </ul>
-        </th:block>
-      </div>
-    </div>
+    <div class="container talkroom">
+      to
   </main>
   <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/messageList'}, show=${'/users/show'}">
     <div th:replace="/commons/footer::footer1"></div>
