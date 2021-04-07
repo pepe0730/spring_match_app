@@ -16,7 +16,16 @@
 <body>
   <main>
     <div class="container talkroom">
-      to
+      <ul>
+        <li th:each="message: ${messages}">
+          <p th:text="${message.text}"></p>
+        </li>
+      </ul>
+      <form action="#" th:action="@{../messageCreate}" method="POST" th:object="${messageForm}">
+        <textarea name="text" id="text" cols="30" rows="4"></textarea>
+        <input type="hidden" name="receiveUserId" th:value="${receiveUserId}">
+        <button type="submit" class="btn btn-primary btn-sm">送信</button>
+      </form>
   </main>
   <th:block th:with="top=${'/users'}, liked=${'/users/liked'}, message=${'/users/messageList'}, show=${'/users/show'}">
     <div th:replace="/commons/footer::footer1"></div>

@@ -1,5 +1,6 @@
 package com.example.match_app.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.example.match_app.domain.Message;
@@ -18,6 +19,16 @@ public class MessageService {
 
   public List<Message> getMessages(User receiveUser, User loginUser) {
     return messageRepository.getMessages(receiveUser, loginUser);
+  }
+
+  public void createMessage(User sendUser, User receiveUser, String text) {
+    Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+    Message message = new Message();
+    message.setSendUser(sendUser);
+    message.setReceiveUser(receiveUser);
+    message.setText(text);
+    message.setCreated_at(currentTime);
+    messageRepository.save(message);
   }
 
 }
